@@ -45,14 +45,26 @@ $return = $vis->addEntity('bouldercreek',
 					    )
 					);
 $return = $vis->addEntity('goldsmithgulch',
-                          array('table' => 'hydromodels.graph_goldsmithgulch',
-                               'fields' => array('basin' => array('field' => 'basin', 'type' => 'text'),
-						 'd_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
-						 'modeled' => array('field' => 'modeled', 'type' => 'number'),
-						 'forecast' => array('field' => 'forecast', 'type' => 'number'),
-						 'baseflow' => array('field' => 'baseflow', 'type' => 'number'),
-				                 'units' => array('field' => 'units', 'type' => 'text'),
+                          array('table' => 'hydromodels.graph_goldsmithgulch2',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'gage' => array('field' => 'gage', 'type' => 'number'),
+						 'past' => array('field' => 'past', 'type' => 'number'),
+						 'title_past' => array('field' => 'title_past', 'type' => 'text'),
+						 'text_past' => array('field' => 'text_past', 'type' => 'text'),
+						 'scen1' => array('field' => 'forecast_a', 'type' => 'number'),
+						 'title_a' => array('field' => 'title_a', 'type' => 'text'),
+						 'text_a' => array('field' => 'text_a', 'type' => 'text'),
+						 'scen2' => array('field' => 'forecast_b', 'type' => 'number'),
+						 'title_b' => array('field' => 'title_b', 'type' => 'text'),
+						 'text_b' => array('field' => 'text_b', 'type' => 'text'),
+						 'scen3' => array('field' => 'forecast_c', 'type' => 'number'),
+						 'title_c' => array('field' => 'title_c', 'type' => 'text'),
+						 'text_c' => array('field' => 'text_c', 'type' => 'text'),
+						 'scen4' => array('field' => 'forecast_d', 'type' => 'number'),
+						 'title_d' => array('field' => 'title_d', 'type' => 'text'),
+						 'text_d' => array('field' => 'text_d', 'type' => 'text'),
 						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'precip' => array('field' => 'precip', 'type' => 'number'),
 						)
 					    )
 					);
@@ -119,7 +131,7 @@ $return = $vis->addEntity('all_lastruns',
 						 )
 					    )
 					);
-$return = $vis->setDefaultEntity('goldsmithgulch_max');
+$return = $vis->setDefaultEntity('goldsmithgulch');
 $return = $vis->handleRequest();
 
 ?>
