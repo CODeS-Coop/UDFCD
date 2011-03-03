@@ -64,6 +64,8 @@ $return = $vis->addEntity('goldsmithgulch',
 						 'title_d' => array('field' => 'title_d', 'type' => 'text'),
 						 'text_d' => array('field' => 'text_d', 'type' => 'text'),
 						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'axistime' => array('field' => 'axistime', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),
 						 'precip' => array('field' => 'precip', 'type' => 'number'),
 						)
 					    )
@@ -129,6 +131,14 @@ $return = $vis->addEntity('all_lastruns',
                                 'fields' => array('basin' => array('field' => 'basin', 'type' => 'text'),
 					         'lastrun' => array('field' => 'lastrun', 'type' => 'datetime'),
 						 )
+					    )
+					);
+$return = $vis->addEntity('goldsmithgulch_peaksum',
+                          array('table' => 'hydromodels.sum_peaks_goldsmithgulch',
+                               'fields' => array('category' => array('field' => 'cat', 'type' => 'text'),
+						 'peaktext' => array('field' => 'peak', 'type' => 'text'),
+						 'scenario' => array('field' => 'scenario', 'type' => 'text')
+						)
 					    )
 					);
 $return = $vis->setDefaultEntity('goldsmithgulch');
