@@ -57,7 +57,7 @@
           $query .= "','";
           $query .= $response->attributes()->qtime;
           $query .= "')";
-          echo $query.'<br />';
+          //echo $query.'<br />';
           $pgresult = pg_exec($dbhandle, $query);
         } 
         echo '  ...done! '.$counter2.' records inserted.<br />';
