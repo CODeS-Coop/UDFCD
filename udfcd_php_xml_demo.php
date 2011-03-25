@@ -1,7 +1,12 @@
 <?php
 /*
+ * connect to the UDFCD database
+ */
+  $dbhandle = pg_connect("host=lredb1 port=5432 user=alert_udfcd password=alertudfcd dbname=UDFCD");
+/*
  * get the list of feeds to process
  */
+  /* not needed for udfcd
   $dbhandle = pg_connect("host=mail.ccwcd.org port=5431 user=mccrometer_rss password=mccrometerrss dbname=CCWCD");
   if (!dbhandle) {
     echo 'Could not connect to ccwcd pg Server';
@@ -9,41 +14,16 @@
   }
   $db_query = 'SELECT * FROM welltelem.rss_feed_parameters WHERE ok and lre_scenario_index=0';
   $results=pg_exec($dbhandle, $db_query);
+  */
 /*
- * now loop through the feeds that are enabled in scenario 0
- * processing them one at a time
+ * now get the data from the UDFCD XML file
  */
-  echo 'Beginning PHP script that accesses and processes the XML data stream from the CCWCD McCrometer RSS feeds containing the latest well telemetry readings<br />';
+  echo 'Beginning the PHP script that accesses and processes the XML data stream from the UDFCD water level XML file feeds containing the latest station water level readings<br />';
   echo 'Processing began at '.date("F j, Y, g:i a").'<br />';
-  $counter=0;
-  while ($data = pg_fetch_object($results)) {
-    ++$counter;
-    echo '  processing feed '.$counter.'<br />';
     /*
      *  define the XML source URL
      */
-      $URL = 'http://www.automata-inc.net/AutomataWeb/SensorRSS.aspx';
-      $numargs = 4;
-      $args = array();
-      $argvals = array();
-      $args[0] = 'feed';
-      $argvals[0] = $data->rss_feed_index;
-      $args[1] = 'h1';
-      $argvals[1] = $data->rss_h1;
-      $args[2] = 'h2';
-      $argvals[2] = $data->rss_h2;
-      $args[3] = 'dataset';
-      $argvals[3] = $data->rss_dataset;
-      for ($i=0; $i<$numargs; $i++) {
-        if($i) {
-          $URL.='&';
-        } else {
-          $URL.='?';
-        }
-        $URL.=$args[$i];
-        $URL.='=';
-        $URL.=$argvals[$i];
-      }
+      $URL = 'http://www.udfcd.org/FWP/LDAD/alert_wl.xml';
       echo '  URL = '.$URL.'<br />';
     /*
      *  open the XML source
@@ -58,6 +38,8 @@
         $counter2=0;
         foreach( $xml as $response ) {
           ++$counter2;
+          dump($response);
+          /*
           $query = "INSERT INTO welltelem.rawdata_fromxml_temp(grab_date,station_name,sensor_reading,sensor_id,sensor_timestamp,user_feed_id,feed_name,reading_units) VALUES (now(),'";
           $query .= $response->StationName;
           $query .= "',";
@@ -73,16 +55,15 @@
           $query .= "','";
           $query .= $response->units;
           $query .= "')";
+          */
           //echo $query.'<br />';
-          $pgresult = pg_exec($dbhandle, $query);
+          //$pgresult = pg_exec($dbhandle, $query);
         } 
         echo '  ...done! '.$counter2.' records inserted.<br />';
       }
-  } 
-  echo $counter.' feeds processed.<br />';
-  echo 'Calling pg function welltelem.mccrometer_rss_all()<br />';
-  $query = 'SELECT * FROM welltelem.mccrometer_rss_all()';
-  $pgresult = pg_exec($dbhandle, $query);
+  //echo 'Calling pg function welltelem.mccrometer_rss_all()<br />';
+  //$query = 'SELECT * FROM welltelem.mccrometer_rss_all()';
+  //$pgresult = pg_exec($dbhandle, $query);
   echo 'Processing ended at '.date("F j, Y, g:i a").'<br />';
 
 function dump($value,$level=0) {
