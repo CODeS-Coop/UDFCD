@@ -38,26 +38,27 @@
         $counter2=0;
         foreach( $xml as $response ) {
           ++$counter2;
-          dump($response);
-          /*
-          $query = "INSERT INTO welltelem.rawdata_fromxml_temp(grab_date,station_name,sensor_reading,sensor_id,sensor_timestamp,user_feed_id,feed_name,reading_units) VALUES (now(),'";
-          $query .= $response->StationName;
-          $query .= "',";
-          $query .= $response->sn_value;
+          $query = "INSERT INTO hydromodels.rawdata_alert(point_id,last_rpt,stage,flow,shef_id,name,lat,long,qtime) VALUES (";
+          $query .= $response->attributes()->id;
           $query .= ",'";
-          $query .= $response->sensor_id;
+          $query .= $response->attributes()->last_rpt;
+          $query .= "',";
+          $query .= $response->attributes()->stage;
+          $query .= ",";
+          $query .= $response->attributes()->flow;
+          $query .= ",'";
+          $query .= $response->attributes()->shef_id;
           $query .= "','";
-          $query .= $response->sn_timestamp;
+          $query .= $response->attributes()->name;
           $query .= "','";
-          $query .= $response->user_feed_id;
+          $query .= $response->attributes()->lat;
           $query .= "','";
-          $query .= $response->feed_name;
+          $query .= $response->attributes()->long;
           $query .= "','";
-          $query .= $response->units;
+          $query .= $response->attributes()->qtime;
           $query .= "')";
-          */
-          //echo $query.'<br />';
-          //$pgresult = pg_exec($dbhandle, $query);
+          echo $query.'<br />';
+          $pgresult = pg_exec($dbhandle, $query);
         } 
         echo '  ...done! '.$counter2.' records inserted.<br />';
       }
