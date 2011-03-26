@@ -1,5 +1,6 @@
 <?php
 /*
+ *
  * connect to the UDFCD database
  */
   $dbhandle = pg_connect("host=lredb1 port=5432 user=madis_udfcd password=madisudfcd dbname=UDFCD");
