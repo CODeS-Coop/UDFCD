@@ -26,26 +26,15 @@ $vis->addEntity('some_table', array(
     )
 ));
 **/
-$return = $vis->addEntity('cherrycreek',
-                          array('table' => 'hydromodels.graph_cherrycreek',
-                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
-						 'Modeled' => array('field' => 'modeled', 'type' => 'number'),
-						 'Forecast' => array('field' => 'forecast', 'type' => 'number'),
-						 'Threshold' => array('field' => 'Threshold', 'type' => 'number'),
-						)
-					    )
-					);
-$return = $vis->addEntity('bouldercreek',
-                          array('table' => 'hydromodels.graph_bouldercreek',
-                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
-						 'Modeled' => array('field' => 'modeled', 'type' => 'number'),
-						 'Forecast' => array('field' => 'forecast', 'type' => 'number'),
-						 'Threshold' => array('field' => 'Threshold', 'type' => 'number'),
-						)
+$return = $vis->addEntity('all_lastruns',
+                          array('table' => 'hydromodels.all_lastruns',
+                                'fields' => array('basin' => array('field' => 'basin', 'type' => 'text'),
+					         'lastrun' => array('field' => 'lastrun', 'type' => 'datetime'),
+						 )
 					    )
 					);
 $return = $vis->addEntity('goldsmithgulch',
-                          array('table' => 'hydromodels.graph_goldsmithgulch2',
+                          array('table' => 'hydromodels.goldsmithgulch_graph2',
                                'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
 						 'gage' => array('field' => 'gage', 'type' => 'number'),
 						 'past' => array('field' => 'past', 'type' => 'number'),
@@ -64,46 +53,22 @@ $return = $vis->addEntity('goldsmithgulch',
 						 'title_d' => array('field' => 'title_d', 'type' => 'text'),
 						 'text_d' => array('field' => 'text_d', 'type' => 'text'),
 						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),						 
+						)
+					    )
+					);
+$return = $vis->addEntity('goldsmithgulch_precip',
+                          array('table' => 'hydromodels.goldsmithgulch_precip',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
 						 'axistime' => array('field' => 'axistime', 'type' => 'text'),
 						 'timestep' => array('field' => 'timestep', 'type' => 'number'),
 						 'precip' => array('field' => 'precip', 'type' => 'number'),
 						)
 					    )
 					);
-$return = $vis->addEntity('harvardgulch',
-                          array('table' => 'hydromodels.graph_harvardgulch',
-                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
-						 'modeled' => array('field' => 'modeled', 'type' => 'number'),
-						 'forecast' => array('field' => 'forecast', 'type' => 'number'),
-						 'threshold' => array('field' => 'threshold', 'type' => 'number'),
-						)
-					    )
-					);
-$return = $vis->addEntity('lenagulch',
-                          array('table' => 'hydromodels.graph_lenagulch',
-                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
-						 'Modeled' => array('field' => 'modeled', 'type' => 'number'),
-						 'Forecast' => array('field' => 'forecast', 'type' => 'number'),
-						 'Threshold' => array('field' => 'Threshold', 'type' => 'number'),
-						)
-					    )
-					);
-$return = $vis->addEntity('bouldercreek_max',
-                          array('table' => 'hydromodels.max_bouldercreek',
-                               'fields' => array('peaktime' => array('field' => 'peaktime', 'type' => 'datetime'),
-						 'peakflow' => array('field' => 'peakflow', 'type' => 'number'),
-						)
-					    )
-					);
-$return = $vis->addEntity('cherrycreek_max',
-                          array('table' => 'hydromodels.max_cherrycreek',
-                               'fields' => array('peaktime' => array('field' => 'peaktime', 'type' => 'datetime'),
-						 'peakflow' => array('field' => 'peakflow', 'type' => 'number'),
-						)
-					    )
-					);
 $return = $vis->addEntity('goldsmithgulch_max',
-                          array('table' => 'hydromodels.max_goldsmithgulch',
+                          array('table' => 'hydromodels.goldsmithgulch_max',
                                'fields' => array('peaktime' => array('field' => 'peaktime', 'type' => 'datetime'),
 						 'peakflow' => array('field' => 'peakflow', 'type' => 'number'),
 						 'threshold' => array('field' => 'threshold', 'type' => 'number'),
@@ -112,36 +77,223 @@ $return = $vis->addEntity('goldsmithgulch_max',
 						)
 					    )
 					);
-$return = $vis->addEntity('harvardgulch_max',
-                          array('table' => 'hydromodels.max_harvardgulch',
-                               'fields' => array('peaktime' => array('field' => 'peaktime', 'type' => 'datetime'),
-						 'peakflow' => array('field' => 'peakflow', 'type' => 'number'),
-						)
-					    )
-					);
-$return = $vis->addEntity('lenagulch_max',
-                          array('table' => 'hydromodels.max_lenagulch',
-                               'fields' => array('peaktime' => array('field' => 'peaktime', 'type' => 'datetime'),
-						 'peakflow' => array('field' => 'peakflow', 'type' => 'number'),
-						)
-					    )
-					);
-$return = $vis->addEntity('all_lastruns',
-                          array('table' => 'hydromodels.all_lastruns',
-                                'fields' => array('basin' => array('field' => 'basin', 'type' => 'text'),
-					         'lastrun' => array('field' => 'lastrun', 'type' => 'datetime'),
-						 )
-					    )
-					);
 $return = $vis->addEntity('goldsmithgulch_peaksum',
-                          array('table' => 'hydromodels.sum_peaks_goldsmithgulch',
+                          array('table' => 'hydromodels.goldsmithgulch_peaks',
                                'fields' => array('category' => array('field' => 'cat', 'type' => 'text'),
 						 'peaktext' => array('field' => 'peak', 'type' => 'text'),
 						 'scenario' => array('field' => 'scenario', 'type' => 'text')
 						)
 					    )
 					);
-$return = $vis->setDefaultEntity('goldsmithgulch');
+$return = $vis->addEntity('cherrycreek',
+                          array('table' => 'hydromodels.cherrycreek_graph2',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'gage' => array('field' => 'gage', 'type' => 'number'),
+						 'past' => array('field' => 'past', 'type' => 'number'),
+						 'title_past' => array('field' => 'title_past', 'type' => 'text'),
+						 'text_past' => array('field' => 'text_past', 'type' => 'text'),
+						 'scen1' => array('field' => 'forecast_a', 'type' => 'number'),
+						 'title_a' => array('field' => 'title_a', 'type' => 'text'),
+						 'text_a' => array('field' => 'text_a', 'type' => 'text'),
+						 'scen2' => array('field' => 'forecast_b', 'type' => 'number'),
+						 'title_b' => array('field' => 'title_b', 'type' => 'text'),
+						 'text_b' => array('field' => 'text_b', 'type' => 'text'),
+						 'scen3' => array('field' => 'forecast_c', 'type' => 'number'),
+						 'title_c' => array('field' => 'title_c', 'type' => 'text'),
+						 'text_c' => array('field' => 'text_c', 'type' => 'text'),
+						 'scen4' => array('field' => 'forecast_d', 'type' => 'number'),
+						 'title_d' => array('field' => 'title_d', 'type' => 'text'),
+						 'text_d' => array('field' => 'text_d', 'type' => 'text'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),						 
+						)
+					    )
+					);
+$return = $vis->addEntity('cherrycreek_precip',
+                          array('table' => 'hydromodels.cherrycreek_precip',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'axistime' => array('field' => 'axistime', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),
+						 'precip' => array('field' => 'precip', 'type' => 'number'),
+						)
+					    )
+					);
+$return = $vis->addEntity('cherrycreek_max',
+                          array('table' => 'hydromodels.cherrycreek_max',
+                               'fields' => array('peaktime' => array('field' => 'peaktime', 'type' => 'datetime'),
+						 'peakflow' => array('field' => 'peakflow', 'type' => 'number'),
+						 'threshold' => array('field' => 'threshold', 'type' => 'number'),
+						 'series_name' => array('field' => 'series_name', 'type' => 'text'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						)
+					    )
+					);
+$return = $vis->addEntity('cherrycreek_peaksum',
+                          array('table' => 'hydromodels.cherrycreek_peaks',
+                               'fields' => array('category' => array('field' => 'cat', 'type' => 'text'),
+						 'peaktext' => array('field' => 'peak', 'type' => 'text'),
+						 'scenario' => array('field' => 'scenario', 'type' => 'text')
+						)
+					    )
+					);
+$return = $vis->addEntity('bouldercreek',
+                          array('table' => 'hydromodels.bouldercreek_graph2',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'gage' => array('field' => 'gage', 'type' => 'number'),
+						 'past' => array('field' => 'past', 'type' => 'number'),
+						 'title_past' => array('field' => 'title_past', 'type' => 'text'),
+						 'text_past' => array('field' => 'text_past', 'type' => 'text'),
+						 'scen1' => array('field' => 'forecast_a', 'type' => 'number'),
+						 'title_a' => array('field' => 'title_a', 'type' => 'text'),
+						 'text_a' => array('field' => 'text_a', 'type' => 'text'),
+						 'scen2' => array('field' => 'forecast_b', 'type' => 'number'),
+						 'title_b' => array('field' => 'title_b', 'type' => 'text'),
+						 'text_b' => array('field' => 'text_b', 'type' => 'text'),
+						 'scen3' => array('field' => 'forecast_c', 'type' => 'number'),
+						 'title_c' => array('field' => 'title_c', 'type' => 'text'),
+						 'text_c' => array('field' => 'text_c', 'type' => 'text'),
+						 'scen4' => array('field' => 'forecast_d', 'type' => 'number'),
+						 'title_d' => array('field' => 'title_d', 'type' => 'text'),
+						 'text_d' => array('field' => 'text_d', 'type' => 'text'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),						 
+						)
+					    )
+					);
+$return = $vis->addEntity('bouldercreek_precip',
+                          array('table' => 'hydromodels.bouldercreek_precip',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'axistime' => array('field' => 'axistime', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),
+						 'precip' => array('field' => 'precip', 'type' => 'number'),
+						)
+					    )
+					);
+$return = $vis->addEntity('bouldercreek_max',
+                          array('table' => 'hydromodels.bouldercreek_max',
+                               'fields' => array('peaktime' => array('field' => 'peaktime', 'type' => 'datetime'),
+						 'peakflow' => array('field' => 'peakflow', 'type' => 'number'),
+						 'threshold' => array('field' => 'threshold', 'type' => 'number'),
+						 'series_name' => array('field' => 'series_name', 'type' => 'text'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						)
+					    )
+					);
+$return = $vis->addEntity('bouldercreek_peaksum',
+                          array('table' => 'hydromodels.bouldercreek_peaks',
+                               'fields' => array('category' => array('field' => 'cat', 'type' => 'text'),
+						 'peaktext' => array('field' => 'peak', 'type' => 'text'),
+						 'scenario' => array('field' => 'scenario', 'type' => 'text')
+						)
+					    )
+					);
+$return = $vis->addEntity('harvardgulch',
+                          array('table' => 'hydromodels.harvardgulch_graph2',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'gage' => array('field' => 'gage', 'type' => 'number'),
+						 'past' => array('field' => 'past', 'type' => 'number'),
+						 'title_past' => array('field' => 'title_past', 'type' => 'text'),
+						 'text_past' => array('field' => 'text_past', 'type' => 'text'),
+						 'scen1' => array('field' => 'forecast_a', 'type' => 'number'),
+						 'title_a' => array('field' => 'title_a', 'type' => 'text'),
+						 'text_a' => array('field' => 'text_a', 'type' => 'text'),
+						 'scen2' => array('field' => 'forecast_b', 'type' => 'number'),
+						 'title_b' => array('field' => 'title_b', 'type' => 'text'),
+						 'text_b' => array('field' => 'text_b', 'type' => 'text'),
+						 'scen3' => array('field' => 'forecast_c', 'type' => 'number'),
+						 'title_c' => array('field' => 'title_c', 'type' => 'text'),
+						 'text_c' => array('field' => 'text_c', 'type' => 'text'),
+						 'scen4' => array('field' => 'forecast_d', 'type' => 'number'),
+						 'title_d' => array('field' => 'title_d', 'type' => 'text'),
+						 'text_d' => array('field' => 'text_d', 'type' => 'text'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),						 
+						)
+					    )
+					);
+$return = $vis->addEntity('harvardgulch_precip',
+                          array('table' => 'hydromodels.harvardgulch_precip',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'axistime' => array('field' => 'axistime', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),
+						 'precip' => array('field' => 'precip', 'type' => 'number'),
+						)
+					    )
+					);
+$return = $vis->addEntity('harvardgulch_max',
+                          array('table' => 'hydromodels.harvardgulch_max',
+                               'fields' => array('peaktime' => array('field' => 'peaktime', 'type' => 'datetime'),
+						 'peakflow' => array('field' => 'peakflow', 'type' => 'number'),
+						 'threshold' => array('field' => 'threshold', 'type' => 'number'),
+						 'series_name' => array('field' => 'series_name', 'type' => 'text'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						)
+					    )
+					);
+$return = $vis->addEntity('harvardgulch_peaksum',
+                          array('table' => 'hydromodels.harvardgulch_peaks',
+                               'fields' => array('category' => array('field' => 'cat', 'type' => 'text'),
+						 'peaktext' => array('field' => 'peak', 'type' => 'text'),
+						 'scenario' => array('field' => 'scenario', 'type' => 'text')
+						)
+					    )
+					);
+$return = $vis->addEntity('lenagulch',
+                          array('table' => 'hydromodels.lenagulch_graph2',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'gage' => array('field' => 'gage', 'type' => 'number'),
+						 'past' => array('field' => 'past', 'type' => 'number'),
+						 'title_past' => array('field' => 'title_past', 'type' => 'text'),
+						 'text_past' => array('field' => 'text_past', 'type' => 'text'),
+						 'scen1' => array('field' => 'forecast_a', 'type' => 'number'),
+						 'title_a' => array('field' => 'title_a', 'type' => 'text'),
+						 'text_a' => array('field' => 'text_a', 'type' => 'text'),
+						 'scen2' => array('field' => 'forecast_b', 'type' => 'number'),
+						 'title_b' => array('field' => 'title_b', 'type' => 'text'),
+						 'text_b' => array('field' => 'text_b', 'type' => 'text'),
+						 'scen3' => array('field' => 'forecast_c', 'type' => 'number'),
+						 'title_c' => array('field' => 'title_c', 'type' => 'text'),
+						 'text_c' => array('field' => 'text_c', 'type' => 'text'),
+						 'scen4' => array('field' => 'forecast_d', 'type' => 'number'),
+						 'title_d' => array('field' => 'title_d', 'type' => 'text'),
+						 'text_d' => array('field' => 'text_d', 'type' => 'text'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),						 
+						)
+					    )
+					);
+$return = $vis->addEntity('lenagulch_precip',
+                          array('table' => 'hydromodels.lenagulch_precip',
+                               'fields' => array('d_timestamp' => array('field' => 'd_timestamp', 'type' => 'datetime'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						 'axistime' => array('field' => 'axistime', 'type' => 'text'),
+						 'timestep' => array('field' => 'timestep', 'type' => 'number'),
+						 'precip' => array('field' => 'precip', 'type' => 'number'),
+						)
+					    )
+					);
+$return = $vis->addEntity('lenagulch_max',
+                          array('table' => 'hydromodels.lenagulch_max',
+                               'fields' => array('peaktime' => array('field' => 'peaktime', 'type' => 'datetime'),
+						 'peakflow' => array('field' => 'peakflow', 'type' => 'number'),
+						 'threshold' => array('field' => 'threshold', 'type' => 'number'),
+						 'series_name' => array('field' => 'series_name', 'type' => 'text'),
+						 'series_id' => array('field' => 'series_id', 'type' => 'text'),
+						)
+					    )
+					);
+$return = $vis->addEntity('lenagulch_peaksum',
+                          array('table' => 'hydromodels.lenagulch_peaks',
+                               'fields' => array('category' => array('field' => 'cat', 'type' => 'text'),
+						 'peaktext' => array('field' => 'peak', 'type' => 'text'),
+						 'scenario' => array('field' => 'scenario', 'type' => 'text')
+						)
+					    )
+					);
+$return = $vis->setDefaultEntity('bouldercreek_precip');
 $return = $vis->handleRequest();
 
 ?>
