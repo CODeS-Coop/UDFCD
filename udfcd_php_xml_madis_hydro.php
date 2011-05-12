@@ -23,17 +23,10 @@
       $URL .= 'rdr=&amp;time=0&amp;minbck=-60&amp;minfwd=0&amp;recwin=4&amp;dfltrsel=2&amp;';
       $URL .= 'state=CO&amp;latll=37.0&amp;lonll=-109.0&amp;latur=41.0&amp;lonur=-102.0&amp;';
       $URL .= 'stanam=&amp;stasel=0&amp;pvdrsel=0&amp;varsel=1&amp;qcsel=0&amp;xml=1&amp;csvmiss=0&amp;';
-// Meteorological Precip Variables
-      $URL .= 'nvars=PCP5M&amp;nvars=PCP1H&amp;nvars=PCP24H&amp;';
-// Wind Variables
-      $URL .= 'nvars=DDMAX1H&amp;nvars=DDMAX&amp;nvars=FFGUST&amp;nvars=DDGUST&amp;nvars=DD&amp;nvars=FF&amp;';
-// Temperature Variables
-      $URL .= 'nvars=TD&amp;nvars=T&amp;nvars=T24MIN&amp;nvars=T24MAX&amp;nvars=T24MINT&amp;nvars=T24MAXT&amp;nvars=SNOW24H&amp;';
-// Other Variables
-      $URL .= 'nvars=RH&amp;nvars=FUELM&amp;nvars=FUELT&amp;nvars=RIVFLO';
-      echo '  URL = '.$URL.'<br />';
+// Hydrodata Variables
+      $URL .= 'nvars=PCP5M&amp;nvars=PCP1H&amp;nvars=PCP24H&amp;nvars=RIVFLO&amp;dataset=hydro';
 //Just Station Names
-//view-source:https://madis-data.noaa.gov/madisPublic/cgi-bin/madisXmlPublicDir?rdr=&time=0&minbck=-60&minfwd=0&recwin=3&dfltrsel=2&state=CO&latll=0.0&lonll=0.0&latur=90.0&lonur=0.0&stanam=&stasel=0&pvdrsel=0&varsel=1&qcsel=1&xml=1&csvmiss=0&nvars=STALOC
+//view-source:https://madis-data.noaa.gov/madisPublic/cgi-bin/madisXmlPublicDir?rdr=&time=0&minbck=-60&minfwd=0&recwin=3&dfltrsel=2&state=CO&latll=0.0&lonll=0.0&latur=90.0&lonur=0.0&stanam=&stasel=0&pvdrsel=0&varsel=1&qcsel=1&xml=1&csvmiss=0&nvars=STALOC&dataset=hydro
     /*
      *  open the XML source
      */
