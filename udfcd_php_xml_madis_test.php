@@ -7,7 +7,7 @@
  * get the data from the MADIS server
  */
   echo 'Beginning the PHP script that accesses and processes an XML data stream from the NOAA MADIS server<br />';
-  echo 'Processing began at '.date("F j, Y, g:i a").'  Pulling back 120 minutes.<br />';
+  echo 'Processing began at '.date("F j, Y, g:i:s a").'  Pulling back 75 minutes.<br />';
     /*
      *  define the XML source URL
      *  the password in this url has to be changed every 60 days.
@@ -20,7 +20,7 @@
      */
 //      $URL = 'https://lrcwe_madis_public:Fr4kUHuzaTuc@madis-data.noaa.gov/madisPublic/cgi-bin/madisXmlPublicDir?rdr=&amp;time=0&amp;minbck=-60&amp;minfwd=0&amp;recwin=4&amp;dfltrsel=2&amp;state=CO&amp;latll=37.0&amp;lonll=-109.0&amp;latur=41.0&amp;lonur=-102.0&amp;stanam=&amp;stasel=0&amp;pvdrsel=0&amp;varsel=2&amp;qcsel=0&amp;xml=1&amp;csvmiss=0';
       $URLbase = 'https://lrcwe_madis_public:Fr4kUHuzaTuc@madis-data.noaa.gov/madisPublic/cgi-bin/madisXmlPublicDir?';
-      $URLbase .= 'rdr=&amp;time=0&amp;minbck=-90&amp;minfwd=0&amp;recwin=4&amp;dfltrsel=2&amp;';
+      $URLbase .= 'rdr=&amp;time=0&amp;minbck=-75&amp;minfwd=0&amp;recwin=4&amp;dfltrsel=2&amp;';
       $URLbase .= 'state=CO&amp;latll=37.0&amp;lonll=-109.0&amp;latur=41.0&amp;lonur=-102.0&amp;';
       $URLbase .= 'stanam=&amp;stasel=0&amp;pvdrsel=0&amp;varsel=1&amp;qcsel=0&amp;xml=1&amp;csvmiss=0&amp;';
 // Meteorological Precip Variables
@@ -31,14 +31,14 @@
     /*
      *  open the XML source
      */
-/*
+
 $counter1=0;
-    echo '<br />Processing 24 Hour Precip from UDFCD (hydro param), '.date("F j, Y, g:i a").'<br />';
+    echo '<br />Processing 24 Hour Precip from UDFCD (hydro param), '.date("F j, Y, g:i:s a").'<br />';
       $xmlstring2 = file_get_contents($URLbase.$URLhydro);
       if( ! $xml = simplexml_load_string($xmlstring2) ) {
         echo '<b>***Error***.  Unable to load 24 Hour UDFCD (hydro) Precip XML.</b><br />'; 
       } else {
-        echo '   Inserting 24 Hour UDFCD Precip, '.date("F j, Y, g:i a").'<br />';
+        echo '   Inserting 24 Hour UDFCD Precip, '.date("F j, Y, g:i:s a").'<br />';
         $counter2=0;
         foreach( $xml as $response ) {
           ++$counter1;
@@ -66,21 +66,15 @@ $counter1=0;
           $query .= "','";
           $query .= $response->attributes()->QCR;
           $query .= "')";
-          $pgresult = pg_exec($dbhandle, $query);
+          $pgresult = pg_send_query($dbhandle, $query);
+          $res1=pg_get_result($dbhandle);
       } 
-    echo '  ...UDFCD 24 HourPrecip done! '.$counter2.' records inserted. '.date("F j, Y, g:i a").'<br />';
+    echo '  ...UDFCD 24 HourPrecip done! '.$counter2.' records inserted. '.date("F j, Y, g:i:s a").'<br />';
       }
-*/
   //call post processing code:
-  echo 'Calling pg function data_processing.madis_daily_process()<br />';
+  echo '<br />Calling pg function data_processing.madis_daily_process()'.date("F j, Y, g:i:s a").'<br />';
   $query = 'SELECT * FROM data_processing.madis_daily_process()';
-  $pgresult = pg_exec($dbhandle, $query);
-/*  echo 'Calling pg function data_processing.madis_hourly_process()<br />';
-  $query = 'SELECT * FROM data_processing.madis_hourly_process()';
-  $pgresult = pg_exec($dbhandle, $query);
-  echo 'Calling pg function data_processing.madis_hourly_purge()<br />';
-  $query = 'SELECT * FROM data_processing.madis_hourly_purge()';
-  $pgresult = pg_exec($dbhandle, $query);
- */
-  //echo 'Processing ended at '.date("F j, Y, g:i a").'. '.$counter1.' total records inserted.';
+  $pgresult = pg_send_query($dbhandle, $query);
+  $res1=pg_get_result($dbhandle);
+  echo '<br />Processing ended at '.date("F j, Y, g:i:s a").'. '.$counter1.' total records inserted.';
 ?>
